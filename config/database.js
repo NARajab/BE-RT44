@@ -5,7 +5,12 @@ const { DATABASE_URL } = process.env;
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: "mysql",
-  logging: false, // Optional: disable logging; default: console.log
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 const databaseValidation = async () => {
